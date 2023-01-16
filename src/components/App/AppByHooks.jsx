@@ -22,8 +22,8 @@ const AppByHooks = () => {
     return contacts.find(contact => contact.name === contactName);
   }
 
-  const addContact = ({ name, number }, reset) => {
-    if (this.isContactNameInList(name)) {
+  const addContact = ({ name }, { number }, reset) => {
+    if (isContactNameInList(name)) {
       alert(`${name} is already in contacts.`);
       return;
     }
@@ -33,20 +33,19 @@ const AppByHooks = () => {
       name,
       number,
     }
-    
-    this.setState(({ contacts }) => ({
-      contacts: [newContact, ...contacts]
-    }))
+
+    setContacts(prev => (
+      [newContact, ...prev]
+    ))
 
     reset()
   }
 
   const deleteContact = userId => {
-    setContacts(prevState => {
-      prevState.filter(({ id }) => id !== userId)
-    })
+    setContacts(prevState => prevState.filter(({ id }) => id !== userId));
   }
 
+// Filter Zone
   const changeFilter = event => {
     setFilter(event.currentTarget.value);
   }

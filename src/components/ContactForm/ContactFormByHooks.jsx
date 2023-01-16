@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import { Form, LabelField, InputField, ButtonAdding } from "./ContactForm.styled";
 
-const ContactFormByHooks = () => {
+const ContactFormByHooks = ({ onSubmit }) => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
@@ -19,7 +19,7 @@ const ContactFormByHooks = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         // reset();
-        // this.props.onSubmit(this.state, this.reset);
+        onSubmit(name, number, reset);
     }
 
     const reset = () => {
