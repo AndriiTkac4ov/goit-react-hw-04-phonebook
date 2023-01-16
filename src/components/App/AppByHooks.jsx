@@ -6,16 +6,10 @@ import Filter from "../Filter/Filter";
 import { nanoid } from "nanoid";
 import { Application, ApplicationTitle, ListTitle } from "./App.styled";
 
-const contactsExample = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-];
-
 const AppByHooks = () => {
-  // const [contacts, setContacts] = useState([]);
-  const [contacts, setContacts] = useState(contactsExample);
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(window.localStorage.getItem('contacts')) ?? []
+  });
   const [filter, setFilter] = useState('');
 
   const isContactNameInList = contactName => {
@@ -60,7 +54,7 @@ const AppByHooks = () => {
 
   // LocalStorage Zone
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts])
   
   return (
