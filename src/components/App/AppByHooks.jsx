@@ -22,23 +22,23 @@ const AppByHooks = () => {
     return contacts.find(contact => contact.name === contactName);
   }
 
-  const addContact = ({ name }, { number }, reset) => {
+  const addContact = ( name, number, reset) => {
     if (isContactNameInList(name)) {
       alert(`${name} is already in contacts.`);
       return;
-    }
+    };
 
     const newContact = {
       id: nanoid(),
       name,
       number,
-    }
+    };
 
     setContacts(prev => (
       [newContact, ...prev]
-    ))
+    ));
 
-    reset()
+    reset();
   }
 
   const deleteContact = userId => {
@@ -58,6 +58,11 @@ const AppByHooks = () => {
 
   const filteredContacts = getFilteredContacts();
 
+  // LocalStorage Zone
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts])
+  
   return (
     <Application>
       <ApplicationTitle>Phonebook</ApplicationTitle>
