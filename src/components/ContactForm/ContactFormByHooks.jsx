@@ -66,4 +66,8 @@ const ContactFormByHooks = ({ onSubmit }) => {
     )
 }
 
+ContactFormByHooks.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}
+
 export default ContactFormByHooks;
